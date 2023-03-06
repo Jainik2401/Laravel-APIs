@@ -9,10 +9,11 @@ change on .env file
 
 
 migrate the project
-    php artisan migrate
+    - php artisan migrate
 
 
-php artisan serve
+Run the project
+    - php artisan serve
 
 
 now, test on postman 
