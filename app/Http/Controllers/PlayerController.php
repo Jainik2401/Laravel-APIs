@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Players;
 use Illuminate\Http\Request;
-use App\Models\Student;
+use Illuminate\Support\Facades\Validator;
 
-class StudentController extends Controller
+class PlayerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $student = Student::all();
+        $Players = Players::all();
         return response()->json(
             [
                 'status' => 200,
-                'student' => $student
+                'Players' => $Players
             ]
         );
     }
@@ -39,9 +38,9 @@ class StudentController extends Controller
         $rules =
             [
                 'name' => 'required|min:3|max:20',
-                'course' => 'required|min:2|max:30',
-                'email' => 'required|email',
-                'phone' => 'required|min:10|max:10'
+                'age' => 'required|min:2|max:3',
+                'role' => 'required|min:4|max:20',
+                'team' => 'required|min:3|max:15'
             ];
         $validated = Validator::make($request->all(), $rules);
         if ($validated->fails()) {
@@ -54,12 +53,12 @@ class StudentController extends Controller
             );
         } else {
 
-            $Student = new Student;
-            $Student->name = $request->name;
-            $Student->course = $request->course;
-            $Student->email = $request->email;
-            $Student->phone = $request->phone;
-            $Student->save();
+            $Players = new Players;
+            $Players->name = $request->name;
+            $Players->age = $request->age;
+            $Players->role = $request->role;
+            $Players->team = $request->team;
+            $Players->save();
 
             return response()->json(
                 [
@@ -75,19 +74,19 @@ class StudentController extends Controller
      */
     public function show(string $id)
     {
-        $student = Student::find($id);
-        if ($student) {
+        $Players = Players::find($id);
+        if ($Players) {
             return response()->json(
                 [
                     'status' => 200,
-                    'student' => $student
+                    'Players' => $Players
                 ]
             );
         } else {
             return response()->json(
                 [
                     'status' => 404,
-                    'student' => 'Data Not Found!'
+                    'Players' => 'Data Not Found!'
                 ]
             );
         }
@@ -109,9 +108,9 @@ class StudentController extends Controller
         $rules =
             [
                 'name' => 'required|min:3|max:20',
-                'course' => 'required|min:2|max:30',
-                'email' => 'required|email',
-                'phone' => 'required|min:10|max:10'
+                'age' => 'required|min:2|max:3',
+                'role' => 'required|min:4|max:20',
+                'team' => 'required|min:3|max:15'
             ];
         $validated = Validator::make($request->all(), $rules);
         if ($validated->fails()) {
@@ -124,25 +123,25 @@ class StudentController extends Controller
             );
         } else {
 
-            $student = Student::find($id);
-            if ($student) {
-                $student->name = $request->name;
-                $student->course = $request->course;
-                $student->email = $request->email;
-                $student->phone = $request->phone;
-                $student->update();
+            $Players = Players::find($id);
+            if ($Players) {
+                $Players->name = $request->name;
+                $Players->age = $request->age;
+                $Players->role = $request->role;
+                $Players->team = $request->team;
+                $Players->update();
 
                 return response()->json(
                     [
                         'status' => 200,
-                        'student' => 'updated successfully'
+                        'Players' => 'updated successfully'
                     ]
                 );
             } else {
                 return response()->json(
                     [
                         'status' => 404,
-                        'student' => 'Data Not Found!'
+                        'Players' => 'Data Not Found!'
                     ]
                 );
             }
@@ -154,32 +153,33 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        $student = Student::find($id);
-        if ($student) {
-            $student->delete();
+        $Players = Players::find($id);
+        if ($Players) {
+            $Players->delete();
 
             return response()->json(
                 [
                     'status' => 200,
-                    'student' => 'deleted successfully'
+                    'Players' => 'deleted successfully'
                 ]
             );
         } else {
             return response()->json(
                 [
                     'status' => 404,
-                    'student' => 'Data Not Found!'
+                    'Players' => 'Data Not Found!'
                 ]
             );
         }
     }
+
     public function search(string $name)
     {
-        $student = Student::where('name', 'like', '%' . $name . '%')->get();
+        $Players = Players::where('name', 'like', '%' . $name . '%')->get();
         return response()->json(
             [
                 'status' => 200,
-                'student' => $student
+                'Players' => $Players
             ]
         );
     }
