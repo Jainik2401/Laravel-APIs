@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\FileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,3 +33,6 @@ Route::get('players/{name}', [PlayerController::class, 'search']);
 Route::post('players', [PlayerController::class, 'store']);
 Route::put('players/{id}', [PlayerController::class, 'update']);
 Route::delete('players/{id}', [PlayerController::class, 'destroy']);
+
+
+Route::post('file', [FileController::class, 'upload']);
