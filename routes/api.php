@@ -4,7 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,3 +38,17 @@ Route::delete('players/{id}', [PlayerController::class, 'destroy']);
 
 
 Route::post('file', [FileController::class, 'upload']);
+
+
+
+// Route::group(['middleware' => 'auth:sanctum'], function () {
+//     Route::get('employee', [EmployeeController::class, 'index']);
+//     Route::get('employee/{id}', [EmployeeController::class, 'show']);
+//     Route::get('employees/{name}', [EmployeeController::class, 'search']);
+//     Route::post('employee', [EmployeeController::class, 'store']);
+//     Route::put('employee/{id}', [EmployeeController::class, 'update']);
+//     Route::delete('employee/{id}', [EmployeeController::class, 'destroy']);
+// });
+
+
+// Route::post("login", [UserController::class, 'index']);
